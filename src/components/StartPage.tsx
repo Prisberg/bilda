@@ -1,11 +1,16 @@
+import { Box } from "@mui/material";
 import CreateQuiz from "./CreateQuiz";
 import Username from "./Username";
+import '../utils/style.css';
+import { useQuizContext } from "../utils/Context";
 
 function StartPage() {
+    const {username} = useQuizContext()
+
     return (
-        <div>Hello world!</div>
-        // <Username/>
-        // <CreateQuiz />
+        <Box className="center">
+            {username ? <CreateQuiz /> : <Username />}
+        </Box>
     );
 }
 
