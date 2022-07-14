@@ -1,10 +1,18 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
+import { useQuizContext } from "../utils/Context";
 import useLocalStorage from "../utils/Hook";
 
 function Username() {
     const [nameState, setNameState] = useState("");
     const [name, setName] = useLocalStorage<string>("name", "");
+    const { getName } = useQuizContext()
+
+    function saveName() {
+        setName(nameState)
+        setNameState("")
+        getName()
+    }
 
     return (
         <TextField
@@ -15,8 +23,7 @@ function Username() {
             onChange={(e) => { setNameState(e.target.value) }}
             onKeyDown={(e) => {
                 if (e.key === 'Enter') {
-                    setName(nameState)
-                    setNameState("")
+                    saveName()
                 }
             }} />
     );
