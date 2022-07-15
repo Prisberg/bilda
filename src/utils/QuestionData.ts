@@ -1,11 +1,16 @@
-export const questions: [] = [
+export const Hisquestions = [
+    {}
+]
 
+export const HisImages = [
+    {}
 ]
 
 
 const Historia = [
     'Historia',
-    {}
+    {questions: Hisquestions},
+    {images: HisImages}
 ]
 const Geografi = [
     'Geografi',

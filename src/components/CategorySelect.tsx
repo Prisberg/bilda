@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
 import FormControl from '@mui/material/FormControl';
@@ -5,18 +6,18 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import * as React from 'react';
+import { useQuizContext } from '../utils/Context';
 import { categories } from '../utils/QuestionData';
 
 
 function CategorySelect() {
-    const [personName, setPersonName] = React.useState<string[]>([]);
+    const { selectedCategories, setSelectedCategories } = useQuizContext()
 
-    const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+    const handleChange = (event: SelectChangeEvent<typeof selectedCategories>) => {
         const {
             target: { value },
         } = event;
-        setPersonName(
+        setSelectedCategories(
             // On autofill we get a stringified value.
             typeof value === 'string' ? value.split(',') : value,
         );
@@ -25,11 +26,17 @@ function CategorySelect() {
     return (
         <Box>
             <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="demo-multiple-chip-label">Välj kategorier</InputLabel>
+                <InputLabel
+                    color="warning"
+                    id="demo-multiple-chip-label">
+                    Välj kategorier
+                </InputLabel>
                 <Select
                     labelId="demo-multiple-chip-label"
                     multiple
-                    value={personName}
+                    color="warning"
+                    required
+                    value={selectedCategories}
                     onChange={handleChange}
                     input={<OutlinedInput id="select-multiple-chip" label="Categories" />}
                     renderValue={(selected) => (
@@ -49,6 +56,13 @@ function CategorySelect() {
                         </MenuItem>
                     ))}
                 </Select>
+                <Button
+                    variant='outlined'
+                    color="warning"
+                    onClick={() =>
+                        setSelectedCategories([])}>
+                    Töm val
+                </Button>
             </FormControl>
         </Box>
     );

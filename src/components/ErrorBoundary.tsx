@@ -1,5 +1,5 @@
-import { Box } from "@mui/material";
 import { Component, ErrorInfo, ReactNode } from "react";
+import BadGate from "./BadGate";
 
 
 interface Props {
@@ -27,7 +27,7 @@ class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <Box>There was an error</Box>
+        <BadGate/>
       );
     }
 

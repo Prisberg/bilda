@@ -1,29 +1,40 @@
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useQuizContext } from "../utils/Context";
 import CategorySelect from "./CategorySelect";
+import "../utils/style.css"
 
 
 function CreateQuiz() {
-  const { username } = useQuizContext()
-  const [amount, setAmount] = useState('20');
+  const { username, amountOfQuestions, setAmountOfQuestions, setQuizActive, selectedCategories } = useQuizContext()
+  const navigate = useNavigate()
 
   const handleAmountChange = (event: SelectChangeEvent) => {
-    setAmount(event.target.value);
+    setAmountOfQuestions(event.target.value);
   }
 
+  console.log(amountOfQuestions)
+
   return (
-    <>
-      <Typography>
-        Välkommen {username}, skapa ditt quiz
-      </Typography>
+    <Box sx={{ gap: '1rem' }} className="centerColumn">
+      <Typography>Välkommen {username}, skapa ditt quiz</Typography>
       <CategorySelect />
-      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-        <InputLabel id="demo-select-small">Antal frågor</InputLabel>
+      <FormControl
+        sx={{
+          m: 1,
+          minWidth: 120
+        }}
+        size="small">
+        <InputLabel
+          color="warning"
+          id="demo-select-small">
+          Antal frågor
+        </InputLabel>
         <Select
           labelId="demo-select-small"
+          color="warning"
           id="demo-select-small"
-          value={amount}
+          value={amountOfQuestions}
           label="Amount of questions"
           onChange={handleAmountChange}
         >
@@ -32,10 +43,23 @@ function CreateQuiz() {
           <MenuItem value={40}>40</MenuItem>
           <MenuItem value={50}>50</MenuItem>
         </Select>
-        <Button variant="outlined">Starta Quiz</Button>
+        {selectedCategories.length > 0 ?
+          <Button
+            variant="outlined"
+            color="warning"
+            onClick={() => {
+              navigate('/quiz');
+              setQuizActive(true)
+            }}>
+            Starta Quiz
+          </Button> :
+          <Button
+            variant="outlined"
+            disabled>
+            Starta Quiz
+          </Button>}
       </FormControl>
-
-    </>
+    </Box>
   );
 }
 

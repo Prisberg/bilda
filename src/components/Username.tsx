@@ -6,7 +6,7 @@ import "../utils/style.css"
 
 function Username() {
     const [nameState, setNameState] = useState("");
-    const [name, setName] = useLocalStorage<string>("name", "");
+    const [name, setName] = useLocalStorage<string>("name", '');
     const { getName } = useQuizContext()
 
     function saveName() {
@@ -21,6 +21,7 @@ function Username() {
                 label="Användarnamn"
                 variant="standard"
                 autoComplete="off"
+                color="warning"
                 value={nameState}
                 required
                 onChange={(e) => { setNameState(e.target.value) }}
@@ -29,7 +30,11 @@ function Username() {
                         saveName()
                     }
                 }} />
-            <Button type="submit">Acceptera användarnamn</Button>
+            <Button
+                color="warning"
+                type="submit">
+                Acceptera användarnamn
+            </Button>
         </form>
     );
 }
