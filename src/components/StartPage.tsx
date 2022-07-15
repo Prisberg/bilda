@@ -8,7 +8,7 @@ function StartPage() {
     const {username} = useQuizContext()
 
     return (
-        <Box className="center">
+        <Box className="centerColumn">
             {username ? <CreateQuiz /> : <Username />}
         </Box>
     );
