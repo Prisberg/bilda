@@ -1,99 +1,112 @@
-export const Hisquestions = [
-    {}
+interface QuestionInterface {
+    category: string;
+    image: string;
+    description: string;
+    alternatives: string[];
+}
+
+export const questions: QuestionInterface[] = [
+    {
+        category: 'Historia',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Geografi',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Svenska',
+        image: 'string',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Engelska',
+        image: 'string',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Matematik',
+        image: 'string',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Biologi',
+        image: 'string',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Anatomi',
+        image: 'string',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Mytologi',
+        image: 'string',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Religion',
+        image: 'string',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Kemi',
+        image: 'string',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Teknik',
+        image: 'string',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Trafik',
+        image: 'string',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Juridik',
+        image: 'string',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Livräddning',
+        image: 'string',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Överlevnad',
+        image: 'string',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Personliga frågor',
+        image: 'string',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
+    {
+        category: 'Externt hämtade frågor (Api)',
+        image: 'string',
+        description: 'string',
+        alternatives: ['one', 'two', 'three']
+    },
 ]
 
-export const HisImages = [
-    {}
-]
-
-
-const Historia = [
-    'Historia',
-    {questions: Hisquestions},
-    {images: HisImages}
-]
-const Geografi = [
-    'Geografi',
-    {}
-]
-const Svenska = [
-    'Svenska',
-    {}
-]
-const Engelska = [
-    'Engelska',
-    {}
-]
-const Matematik = [
-    'Matematik',
-    {}
-]
-const Biologi = [
-    'Biologi',
-    {}
-]
-const Anatomi = [
-    'Anatomi',
-    {}
-]
-const Mytologi = [
-    'Mytologi',
-    {}
-]
-const Religion = [
-    'Religion',
-    {}
-]
-const Kemi = [
-    'Kemi',
-    {}
-]
-const Teknik = [
-    'Teknik',
-    {}
-]
-const Trafik = [
-    'Trafik',
-    {}
-]
-const Juridik = [
-    'Juridik',
-    {}
-]
-const Livräddning = [
-    'Livräddning',
-    {}
-]
-const Överlevnad = [
-    'Överlevnad',
-    {}
-]
-const Personliga = [
-    'Personliga frågor',
-    {}
-]
-const Externt = [
-    'Externt hämtade frågor (api)',
-    {}
-]
-
-
-export const categories = [
-    Historia,
-    Geografi,
-    Svenska,
-    Engelska,
-    Matematik,
-    Biologi,
-    Anatomi,
-    Mytologi,
-    Religion,
-    Kemi,
-    Teknik,
-    Trafik,
-    Juridik,
-    Livräddning,
-    Överlevnad,
-    Personliga,
-    Externt
-];

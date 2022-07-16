@@ -1,7 +1,12 @@
 import { Box, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
 import "../utils/style.css"
 
+
 function Quiz() {
+
+  //function for comparing selected categories with the categories on the questions, if question does not have right category it is removed.
+  //Randomize the order of the questions.
+
   return (
     <Box className="centerColumn">
       {/* map out question */}
@@ -13,7 +18,6 @@ function Quiz() {
         <FormLabel color="warning" id="demo-radio-buttons-group-label">Alternativ</FormLabel>
         <RadioGroup
           aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="female"
           name="radio-buttons-group"
         >
           <FormControlLabel value="temporary" control={<Radio color="warning" />} label="Temporary" />

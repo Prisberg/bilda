@@ -1,10 +1,12 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import "../utils/style.css"
 
 export default function BadGate() {
     return (
-        <Typography className="centerColumn" variant="h1">
-            404: Not found.
-        </Typography>
+        <Box className="centerColumn">
+            <Typography variant="h3">
+                404: An error ocurred.
+            </Typography>
+        </Box>
     );
 }

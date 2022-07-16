@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
+import { questions } from "./QuestionData";
 
 interface ContextInterface {
     username: string;
@@ -8,8 +9,10 @@ interface ContextInterface {
     amountOfQuestions: string,
     setAmountOfQuestions: Function,
     getName: Function;
-    quizActive: boolean, 
-    setQuizActive:Function
+    quizActive: boolean,
+    setQuizActive: Function,
+    categories: string[],
+    setCategories: Function
 }
 
 export const QuizContext = createContext<ContextInterface>({
@@ -20,8 +23,10 @@ export const QuizContext = createContext<ContextInterface>({
     amountOfQuestions: '20',
     setAmountOfQuestions: () => false,
     getName: () => false,
-    quizActive: false, 
-    setQuizActive: () => false
+    quizActive: false,
+    setQuizActive: () => false,
+    categories: [],
+    setCategories: () => false,
 })
 
 export default function QuizProvider(props: any) {
@@ -29,6 +34,7 @@ export default function QuizProvider(props: any) {
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [amountOfQuestions, setAmountOfQuestions] = useState('20');
     const [quizActive, setQuizActive] = useState(false);
+    const [categories, setCategories] = useState<string[]>([])
 
 
     function getName() {
@@ -38,8 +44,22 @@ export default function QuizProvider(props: any) {
             setUsername(data.replaceAll('"', ''))
     }
 
+
+    function extractCategories() {
+        questions.forEach((item) => {
+            if (categories.includes(item.category)) {
+                return
+            } else {
+                categories.push(item.category)
+                setCategories(categories)
+            }
+        })
+    }
+
     useEffect(() => {
         getName()
+        extractCategories()
+        console.log('useEffect runs')
     }, [])
 
     return (
@@ -53,7 +73,8 @@ export default function QuizProvider(props: any) {
                 setAmountOfQuestions,
                 getName,
                 quizActive,
-                setQuizActive
+                setQuizActive,
+                categories,
             }}
             {...props}
         />

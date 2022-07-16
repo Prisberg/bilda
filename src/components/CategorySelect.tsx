@@ -7,11 +7,10 @@ import MenuItem from '@mui/material/MenuItem';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useQuizContext } from '../utils/Context';
-import { categories } from '../utils/QuestionData';
 
 
 function CategorySelect() {
-    const { selectedCategories, setSelectedCategories } = useQuizContext()
+    const { selectedCategories, setSelectedCategories, categories } = useQuizContext()
 
     const handleChange = (event: SelectChangeEvent<typeof selectedCategories>) => {
         const {
@@ -47,22 +46,30 @@ function CategorySelect() {
                         </Box>
                     )}
                 >
-                    {categories.map((categoryArr) => (
+                    {categories.map((category) => (
                         <MenuItem
-                            key={categoryArr[0].toString()}
-                            value={categoryArr[0].toString()}
+                            key={category}
+                            value={category}
                         >
-                            {categoryArr[0].toString()}
+                            {category}
                         </MenuItem>
                     ))}
                 </Select>
-                <Button
+                {selectedCategories.length > 0 ? <Button
                     variant='outlined'
                     color="warning"
                     onClick={() =>
-                        setSelectedCategories([])}>
+                        setSelectedCategories([])}
+                >
                     Töm val
                 </Button>
+                    :
+                    <Button
+                        variant='outlined'
+                        disabled
+                        >
+                        Töm val
+                    </Button>}
             </FormControl>
         </Box>
     );

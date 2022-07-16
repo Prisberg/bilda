@@ -13,8 +13,6 @@ function CreateQuiz() {
     setAmountOfQuestions(event.target.value);
   }
 
-  console.log(amountOfQuestions)
-
   return (
     <Box sx={{ gap: '1rem' }} className="centerColumn">
       <Typography>Välkommen {username}, skapa ditt quiz</Typography>
