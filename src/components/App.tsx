@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useQuizContext } from "../utils/Context";
 import BadGate from "./BadGate";
 import ErrorBoundary from "./ErrorBoundary";
+import Navbar from "./Navbar";
 import Quiz from "./Quiz";
 import StartPage from './StartPage';
 
@@ -11,6 +12,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Navbar />
       <ErrorBoundary>
         <Routes>
           <Route path="" element={<StartPage />} />

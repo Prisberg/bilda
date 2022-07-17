@@ -6,7 +6,7 @@ import "../utils/style.css"
 
 
 function CreateQuiz() {
-  const { username, amountOfQuestions, setAmountOfQuestions, setQuizActive, selectedCategories } = useQuizContext()
+  const { username, amountOfQuestions, setAmountOfQuestions, setQuizActive, selectedCategories, extractQuestions } = useQuizContext()
   const navigate = useNavigate()
 
   const handleAmountChange = (event: SelectChangeEvent) => {
@@ -32,7 +32,7 @@ function CreateQuiz() {
           labelId="demo-select-small"
           color="warning"
           id="demo-select-small"
-          value={amountOfQuestions}
+          value={amountOfQuestions.toString()}
           label="Amount of questions"
           onChange={handleAmountChange}
         >
@@ -46,8 +46,9 @@ function CreateQuiz() {
             variant="outlined"
             color="warning"
             onClick={() => {
+              setQuizActive(true);
+              extractQuestions();
               navigate('/quiz');
-              setQuizActive(true)
             }}>
             Starta Quiz
           </Button> :
