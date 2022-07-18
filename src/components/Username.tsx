@@ -30,11 +30,16 @@ function Username() {
                         saveName()
                     }
                 }} />
-            <Button
+            { nameState ? <Button
                 color="warning"
                 type="submit">
                 Acceptera användarnamn
-            </Button>
+            </Button> :
+            <Button
+                disabled
+                type="submit">
+                Acceptera användarnamn
+            </Button>}
         </form>
     );
 }

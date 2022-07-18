@@ -11,8 +11,6 @@ function Navbar() {
     const { setSelectedQuestions, selectedQuestions, quizActive, setQuizActive } = useQuizContext()
 
     useEffect(() => {
-        console.log(location);
-        // If leaving /quiz set quizactive to false and reset selectedQuestions.
         if(location.pathname === '/quiz' && quizActive) {
             return
         } else {
@@ -28,7 +26,6 @@ function Navbar() {
                         <IconButton
                             size="large"
                             edge="start"
-                            color="inherit"
                             aria-label="menu"
                             sx={{ mr: 2 }}
                             onClick={() => navigate('/')}
@@ -41,9 +38,10 @@ function Navbar() {
                     <IconButton
                         size="large"
                         edge="end"
-                        color="inherit"
+                        color="warning"
                         aria-label="menu"
                         sx={{ mr: 2, right: 0 }}
+                        onClick={() => navigate('/settings')}
                     >
                         <SettingsIcon />
                     </IconButton>

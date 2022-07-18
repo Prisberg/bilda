@@ -78,7 +78,7 @@ export default function QuizProvider(props: any) {
         extractCategories()
     }, [])
 
-    //reset selected questions after exiting
+    //reset selected questions after exiting, potential to store finished quiz and result?
     useEffect(() => {
         if (!quizActive){
             setSelectedQuestions([])
