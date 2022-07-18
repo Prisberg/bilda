@@ -64,13 +64,10 @@ export default function QuizProvider(props: any) {
     }
 
     function extractQuestions() {
-        // function for comparing selected categories with the categories on the questions, if question does not have right category it is removed.
         questions.forEach((item) => {
-            //valda kategorier finns på frågans kategori, spara frågan i en ny array.
-            //Använd amountOfQuestions för att begränsa antalet frågor.
-            if (selectedCategories.includes(item.category) && selectedQuestions.length <= amountOfQuestions) {
+            if (selectedCategories.includes(item.category) && selectedQuestions.length < amountOfQuestions) {
                 selectedQuestions.push(item)
-                //Randomize the order of the questions?
+                //randomizes the question order, not tested yet.
                 setSelectedQuestions(selectedQuestions.sort(() => 0.5 - Math.random()))
             } else { return }
         })
@@ -79,8 +76,14 @@ export default function QuizProvider(props: any) {
     useEffect(() => {
         getName()
         extractCategories()
-        console.log('useEffect runs')
     }, [])
+
+    //reset selected questions after exiting
+    useEffect(() => {
+        if (!quizActive){
+            setSelectedQuestions([])
+        }
+    }, [quizActive])
 
     return (
         <QuizContext.Provider

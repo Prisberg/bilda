@@ -13,7 +13,7 @@ function Quiz() {
         <Box key={index}>
           <Box sx={{ display: 'flex', gap: '1rem' }}>
             <Typography>{question.description}</Typography>
-            <Typography>Fråga nummer {index}</Typography>
+            <Typography>Fråga nummer {index += 1}</Typography>
           </Box>
           <FormControl>
             <FormLabel color="warning" id="demo-radio-buttons-group-label">Alternativ</FormLabel>
