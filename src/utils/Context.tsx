@@ -67,8 +67,7 @@ export default function QuizProvider(props: any) {
         questions.forEach((item) => {
             if (selectedCategories.includes(item.category) && selectedQuestions.length < amountOfQuestions) {
                 selectedQuestions.push(item)
-                //randomizes the question order, not tested yet.
-                setSelectedQuestions(selectedQuestions.sort(() => 0.5 - Math.random()))
+                setSelectedQuestions(selectedQuestions.sort(() => Math.random() - .5))
             } else { return }
         })
     }

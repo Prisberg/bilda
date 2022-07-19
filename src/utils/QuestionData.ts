@@ -10,21 +10,21 @@ export const questions: QuestionInterface[] = [
     {
         category: 'Historia',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png',
-        description: 'string',
+        description: 'Historia',
         alternatives: ['one', 'two', 'three'],
         correctAlternativeIndex: 0
     },
     {
         category: 'Geografi',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/SNice.svg/1200px-SNice.svg.png',
-        description: 'string',
+        description: 'Geografi',
         alternatives: ['one', 'two', 'three'],
         correctAlternativeIndex: 0
     },
     {
         category: 'Svenska',
         image: 'string',
-        description: 'string',
+        description: 'Svenska',
         alternatives: ['one', 'two', 'three'],
         correctAlternativeIndex: 0
     },
