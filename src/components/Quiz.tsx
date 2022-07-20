@@ -1,10 +1,9 @@
-import { Box, Button, FormControl, FormControlLabel, FormLabel, Paper, Radio, RadioGroup, Typography } from "@mui/material";
+import { Box, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
+import { useState } from "react";
+import { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { useQuizContext } from "../utils/Context";
 import "../utils/style.css";
-import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { QuestionInterface } from "../utils/QuestionData";
-import { useState } from "react";
 
 // Import Swiper styles
 import 'swiper/css';
@@ -15,28 +14,45 @@ import 'swiper/css/scrollbar';
 
 function Quiz() {
   const { selectedQuestions } = useQuizContext()
-  const [value, setValue] = useState('')
+  const [submitButton, setSubmitButton] = useState<HTMLButtonElement>()
+  const [checkedRadio, setCheckedRadio] = useState<HTMLInputElement>()
+  const [correctAnswer, setCorrectAnswer] = useState<number>()
+  const [radioButtons, setRadioButtons] = useState<HTMLCollectionOf<HTMLInputElement>>()
 
-  //ERRORS: answerCorrection corrects across questions for the last radio button you pressed. answerSelected conditional rendering is not specific for each instance of the question, if set to true by one question then all questions recieve the "lås svar" button.
-
-  function answerCorrection(question: QuestionInterface, answerIndex: number) {
-    //Answer index = the index you get from the map. Use the answerIndex to compare to question.correctAlternativeIndex, if they are the same then the answer is correct.
-    if (question.correctAlternativeIndex === answerIndex) {
-      console.log('correct answer');
-    } else {
-      console.log('wrong answer');
-    }
+  function currentSlide(swiper: any) {
+    const activeSlide: HTMLElement = swiper.slides[swiper.activeIndex]
+    setRadioButtons(activeSlide.getElementsByTagName('input'))
+    setSubmitButton(activeSlide.getElementsByTagName('button')[0])
+    setCorrectAnswer(selectedQuestions[swiper.activeIndex].correctAlternativeIndex)
   }
-  console.log(value);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log(value)
-
+  function handleRadioChange() {
+    if (submitButton) {
+      submitButton.removeAttribute('disabled')
+      submitButton.classList.remove('Mui-disabled')
+    }
+    if (radioButtons) {
+      for (let i = 0; i < radioButtons.length; i++) {
+        const element = radioButtons[i];
+        if (element.checked) {
+          return setCheckedRadio(element);
+        }
+      }
+    }
   };
 
-  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue((event.target as HTMLInputElement).value);
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    console.log('clicked');
+
+    if (checkedRadio) {
+      if (parseInt(checkedRadio.value) === correctAnswer) {
+        console.log('correct answer')
+      } else {
+        console.log('wrong answer');
+      }
+    }
+    //Lock the radio buttons and the submit button.
   };
 
   return (
@@ -48,12 +64,12 @@ function Quiz() {
       centeredSlides={true}
       navigation
       pagination={{ clickable: true }}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log('slide change')}
+      onSwiper={(swiper) => currentSlide(swiper)}
+      onSlideChange={(swiper) => currentSlide(swiper)}
     >
       {selectedQuestions.map((question, index) => (
         <SwiperSlide className='centerColumn' key={index}>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e) => handleSubmit(e)}>
             <Box sx={{ display: 'flex', gap: '1rem' }}>
               <Typography>{question.description}</Typography>
               <Typography>Fråga {index += 1} av {selectedQuestions.length}</Typography>
@@ -74,12 +90,11 @@ function Quiz() {
                 ))
                 }
               </RadioGroup>
-              {value ?
-                <Button
-                  type="submit">
-                  Lås svar
-                </Button> :
-                <Button disabled>Lås svar</Button>}
+              <Button
+                disabled
+                type="submit">
+                Lås svar
+              </Button>
             </FormControl>
           </form>
         </SwiperSlide>
