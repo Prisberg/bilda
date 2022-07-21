@@ -14,7 +14,7 @@ export default function BadGate() {
         if (BRouterlocation.pathname === '/quiz' && !quizActive) {
             setError('Du har inget aktivt quiz.')
         } else {
-            setError('404: Vi hittar inte vad du letar efter.')
+            setError('404: Något gick fel.')
         }
     }
 

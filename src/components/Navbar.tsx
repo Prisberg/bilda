@@ -18,6 +18,16 @@ function Navbar() {
         }
     }, [location]);
 
+    function navigation(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        if (location.pathname === '/quiz' && quizActive) {
+            if (window.confirm('Om du lämnar sidan nu kommer quizet avbrytas')) {
+                e.currentTarget.innerText ? navigate('/') : navigate('/settings')
+            }
+        } else {
+            e.currentTarget.innerText ? navigate('/') : navigate('/settings')
+        }
+    }
+
     return (
         <Box sx={{ zIndex: 3, position: 'absolute', width: '100%' }}>
             <AppBar position="static">
@@ -35,7 +45,7 @@ function Navbar() {
                                     color: '#ff9100',
                                 }
                             }}
-                            onClick={() => navigate('/')}
+                            onClick={(e) => navigation(e)}
                         >
                             <Typography variant="h6" component="div">
                                 <MenuBookIcon />BILDA
@@ -49,7 +59,7 @@ function Navbar() {
                             color="warning"
                             aria-label="menu"
                             sx={{ mr: 2, right: 0 }}
-                            onClick={() => navigate('/settings')}
+                            onClick={(e) => navigation(e)}
                         >
                             <SettingsIcon />
                         </IconButton> : null}

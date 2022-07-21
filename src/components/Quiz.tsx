@@ -1,5 +1,5 @@
 import { Box, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useQuizContext } from "../utils/Context";
@@ -12,6 +12,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { questions } from "../utils/QuestionData";
+import { Height } from "@mui/icons-material";
 
 
 function Quiz() {
@@ -105,21 +106,24 @@ function Quiz() {
     }
   };
 
+
   return (
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y]}
-      className='centerColumn'
+      className='swiperStyle'
       spaceBetween={50}
       slidesPerView={1}
       centeredSlides={true}
       navigation
+      mousewheel
       pagination={{ clickable: true }}
       onSwiper={(swiper) => currentSlide(swiper)}
       onSlideChange={(swiper) => currentSlide(swiper)}
     >
       {selectedQuestions.map((question, index) => (
-        <SwiperSlide className='centerColumn' key={index}>
-          <form onSubmit={(e) => handleSubmit(e)}>
+        <SwiperSlide style={{paddingTop: '12rem'}} className="centerColumn" key={index}>
+          <form className='centerColumn' onSubmit={(e) => handleSubmit(e)}>
+            {question.image ? <img style={image} src={question.image} /> : null}
             <Box sx={{ display: 'flex', gap: '1rem' }}>
               <Typography>{question.description}</Typography>
               <Typography>Fråga {index += 1} av {selectedQuestions.length}</Typography>
@@ -154,8 +158,8 @@ function Quiz() {
               color="warning"
               variant="outlined"
               sx={{
-                position: 'absolute',
-                bottom: '5rem'
+                position: 'relative',
+                bottom: '5rem',
               }}>Resultat</Button> :
             null
           }
@@ -166,3 +170,8 @@ function Quiz() {
 }
 
 export default Quiz;
+
+const image: CSSProperties = {
+  width: '200px',
+  height: '200px'
+}
