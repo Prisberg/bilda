@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
+import { Box, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, SxProps, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -18,15 +18,16 @@ function Quiz() {
   const [submitButton, setSubmitButton] = useState<HTMLButtonElement>()
   const [checkedRadio, setCheckedRadio] = useState<HTMLInputElement>()
   const [correctAnswer, setCorrectAnswer] = useState<number>()
-  const [activeSlideIndex, setActiveSlideIndex] = useState<number>()
+  const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
   const [radioButtons, setRadioButtons] = useState<HTMLCollectionOf<HTMLInputElement>>()
+  const [radioLabels, setRadioLabels] = useState<NodeListOf<HTMLElement>>()
 
   function getCheckedRadio() {
     if (radioButtons) {
       for (let i = 0; i < radioButtons.length; i++) {
-        const element = radioButtons[i];
-        if (element.checked) {
-          return setCheckedRadio(element);
+        const radio = radioButtons[i];
+        if (radio.checked) {
+          return setCheckedRadio(radio);
         }
       }
     }
@@ -38,9 +39,9 @@ function Quiz() {
 
   function currentSlide(swiper: any) {
     const activeSlide: HTMLElement = swiper.slides[swiper.activeIndex]
-    const focusForm = activeSlide.getElementsByTagName('form')[0]
     setActiveSlideIndex(swiper.activeIndex)
     setRadioButtons(activeSlide.getElementsByTagName('input'))
+    setRadioLabels(activeSlide.querySelectorAll<HTMLElement>('.MuiFormControlLabel-root'))
     setSubmitButton(activeSlide.getElementsByTagName('button')[0])
     setCorrectAnswer(selectedQuestions[swiper.activeIndex].correctAlternativeIndex)
   }
@@ -55,14 +56,8 @@ function Quiz() {
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    console.log('clicked');
 
-    if (submitButton) {
-      submitButton.setAttribute('disabled', 'true')
-      submitButton.classList.add('Mui-disabled')
-      submitButton.innerText = 'Besvarad'
-    }
-
+    //Checks if your answer was correct.
     if (checkedRadio) {
       if (parseInt(checkedRadio.value) === correctAnswer) {
         console.log('correct answer')
@@ -73,21 +68,33 @@ function Quiz() {
         //set state to render right or wrong
       }
     }
-    //Lock the radio buttons and the submit button.
+    //Lock the radio buttons.
     if (radioButtons) {
       for (let i = 0; i < radioButtons.length; i++) {
         const radio = radioButtons[i];
         radio.setAttribute('disabled', 'true')
-        
-        if (activeSlideIndex) {
+      }
+    }
+    //Lock submit button.
+    if (submitButton) {
+      submitButton.setAttribute('disabled', 'true')
+      submitButton.classList.add('Mui-disabled')
+      submitButton.innerText = 'Besvarad'
+    }
+
+    //Set background color of alternatives to display correctness of the answers.
+    if (radioLabels) {
+      for (let i = 0; i < radioLabels.length; i++) {
+        const singleLabel = radioLabels[i];
+        const radioCircle = singleLabel.children[0] as HTMLElement
+
+        if (activeSlideIndex != undefined) {
           if (i === questions[activeSlideIndex].correctAlternativeIndex) {
-            // set radio color to green
-            if (radio.nextElementSibling)
-            radio.classList.add('green')
-            console.log(radio);
+            radioCircle.style.color = 'green'
+            singleLabel.style.color = 'green'
           } else {
-            radio.classList.add('red')
-            console.log(radio);
+            radioCircle.style.color = 'red'
+            singleLabel.style.color = 'red'
           }
         }
       }
