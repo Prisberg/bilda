@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, SxProps, Typography } from "@mui/material";
+import { Box, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -6,6 +6,7 @@ import { useQuizContext } from "../utils/Context";
 import "../utils/style.css";
 
 // Import Swiper styles
+import { useNavigate } from "react-router-dom";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -14,7 +15,8 @@ import { questions } from "../utils/QuestionData";
 
 
 function Quiz() {
-  const { selectedQuestions } = useQuizContext()
+  let { selectedQuestions, setScore, score } = useQuizContext()
+  const navigate = useNavigate()
   const [submitButton, setSubmitButton] = useState<HTMLButtonElement>()
   const [checkedRadio, setCheckedRadio] = useState<HTMLInputElement>()
   const [correctAnswer, setCorrectAnswer] = useState<number>()
@@ -38,6 +40,7 @@ function Quiz() {
   }, [radioButtons])
 
   function currentSlide(swiper: any) {
+    document.documentElement.style.setProperty('--swiper-theme-color', '#ffa726');
     const activeSlide: HTMLElement = swiper.slides[swiper.activeIndex]
     setActiveSlideIndex(swiper.activeIndex)
     setRadioButtons(activeSlide.getElementsByTagName('input'))
@@ -61,11 +64,12 @@ function Quiz() {
     if (checkedRadio) {
       if (parseInt(checkedRadio.value) === correctAnswer) {
         console.log('correct answer')
-        //Increment counter for the amount of right answers you had.
-        //set state to render right or wrong. Run through the radiobuttons and if their index matches correctAnswer then set their color to green else red.
+        const onePoint = 1
+        setScore(score + onePoint)
+        //set state to render right or wrong snackbar
       } else {
         console.log('wrong answer');
-        //set state to render right or wrong
+        //set state to render right or wrong snackbar
       }
     }
     //Lock the radio buttons.
@@ -82,7 +86,7 @@ function Quiz() {
       submitButton.innerText = 'Besvarad'
     }
 
-    //Set background color of alternatives to display correctness of the answers.
+    //Set color of alternatives to display correctness of the answers.
     if (radioLabels) {
       for (let i = 0; i < radioLabels.length; i++) {
         const singleLabel = radioLabels[i];
@@ -144,6 +148,17 @@ function Quiz() {
               </Button>
             </FormControl>
           </form>
+          {index === selectedQuestions.length ?
+            <Button
+              onClick={() => navigate('result')}
+              color="warning"
+              variant="outlined"
+              sx={{
+                position: 'absolute',
+                bottom: '5rem'
+              }}>Resultat</Button> :
+            null
+          }
         </SwiperSlide>
       ))}
     </Swiper>

@@ -28,7 +28,7 @@ function Navbar() {
                             edge="start"
                             aria-label="menu"
                             sx={{
-                                transition:'color 200ms ease-in-out',
+                                transition: 'color 200ms ease-in-out',
                                 mr: 2,
                                 '&:hover': {
                                     backgroundColor: 'rgba(0, 0, 0, 0)',

@@ -4,6 +4,7 @@ import BadGate from "./BadGate";
 import ErrorBoundary from "./ErrorBoundary";
 import Navbar from "./Navbar";
 import Quiz from "./Quiz";
+import Result from "./Result";
 import Settings from "./Settings";
 import StartPage from './StartPage';
 
@@ -17,7 +18,8 @@ function App() {
       <ErrorBoundary>
         <Routes>
           <Route path="" element={<StartPage />} />
-          <Route path="/quiz" element={quizActive ? <Quiz /> : <BadGate />} />
+          <Route path="/quiz" element={quizActive && username ? <Quiz /> : <BadGate />} />
+          <Route path="/quiz/result" element={username ? <Result /> : <BadGate />} />
           <Route path="/settings" element={username ? <Settings /> : <BadGate />} />
           <Route path="*" element={<BadGate />} />
         </Routes>

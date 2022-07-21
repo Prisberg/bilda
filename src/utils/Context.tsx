@@ -16,6 +16,10 @@ interface ContextInterface {
     selectedQuestions: QuestionInterface[],
     setSelectedQuestions: Function,
     extractQuestions: Function,
+    score: number,
+    setScore: Function,
+    possibleScore: number,
+    setPossibleScore: Function,
 }
 
 export const QuizContext = createContext<ContextInterface>({
@@ -33,6 +37,10 @@ export const QuizContext = createContext<ContextInterface>({
     selectedQuestions: [],
     setSelectedQuestions: () => false,
     extractQuestions: () => false,
+    score: 0,
+    setScore: () => false,
+    possibleScore: 0,
+    setPossibleScore: () => false,
 })
 
 export default function QuizProvider(props: any) {
@@ -42,6 +50,8 @@ export default function QuizProvider(props: any) {
     const [quizActive, setQuizActive] = useState(false);
     const [categories, setCategories] = useState<string[]>([])
     const [selectedQuestions, setSelectedQuestions] = useState<QuestionInterface[]>([])
+    const [score, setScore] = useState(0);
+    const [possibleScore, setPossibleScore] = useState(0);
 
 
     function getName() {
@@ -68,6 +78,7 @@ export default function QuizProvider(props: any) {
             if (selectedCategories.includes(item.category) && selectedQuestions.length < amountOfQuestions) {
                 selectedQuestions.push(item)
                 setSelectedQuestions(selectedQuestions.sort(() => Math.random() - .5))
+                setPossibleScore(selectedQuestions.length)
             } else { return }
         })
     }
@@ -79,8 +90,10 @@ export default function QuizProvider(props: any) {
 
     //reset selected questions after exiting, potential to store finished quiz and result?
     useEffect(() => {
-        if (!quizActive){
+        if (!quizActive) {
             setSelectedQuestions([])
+        } else {
+            setScore(0)
         }
     }, [quizActive])
 
@@ -98,7 +111,11 @@ export default function QuizProvider(props: any) {
                 setQuizActive,
                 categories,
                 selectedQuestions,
-                extractQuestions
+                extractQuestions,
+                score,
+                setScore,
+                possibleScore,
+                setPossibleScore,
             }}
             {...props}
         />
