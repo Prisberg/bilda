@@ -26,7 +26,7 @@ function CreateQuiz() {
         <InputLabel
           color="warning"
           id="demo-select-small">
-          Antal frågor
+          Max antal frågor
         </InputLabel>
         <Select
           labelId="demo-select-small"

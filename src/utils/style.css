@@ -12,9 +12,105 @@
   width: 100%;
 }
 
+/* .swiperStyle {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+} */
+
+
+.swiperStyle>.swiper-button-next {
+  position: fixed;
+}
+
+.swiperStyle>.swiper-button-prev {
+  position: fixed;
+}
+
+.swiperStyle>.swiper-pagination {
+  position: fixed;
+  background-color: #6d6c6c;
+}
+
+.swiperForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100vw;
+  margin-top: 5rem;
+  cursor: -webkit-grab;
+  cursor: grab;
+  user-select: none;
+}
+
+.swiperForm:active {
+  cursor: -webkit-grabing;
+  cursor: grabbing;
+}
+
+.swiperPaper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 90%;
+  margin-bottom: 5rem;
+  padding: 1rem 0;
+  gap: 1rem;
+
+}
+
 body {
   background-color: #333;
   color: white;
 }
 
 /* warning: #ffa726 */
+/* 
+@media (min-width: 700px) {
+  .swiperStyle {
+    width: 70%;
+  }
+
+  .swiperStyle>.swiper-button-next {
+    width: 70%;
+  }
+
+  .swiperStyle>.swiper-button-prev {
+    width: 70%;
+  }
+
+}
+
+@media (min-width: 1200px) {
+  .swiperStyle {
+    width: 50%;
+  }
+
+  .swiperStyle>.swiper-button-next {
+    width: 50%;
+    font-weight: 900;
+
+  }
+
+  .swiperStyle>.swiper-button-prev {
+    width: 50%;
+    font-weight: 900;
+
+  }
+}
+
+@media (min-width: 2000px) {
+  .swiperStyle {
+    width: 30%;
+  }
+
+  .swiperStyle>.swiper-button-next {
+    width: 70%;
+  }
+
+  .swiperStyle>.swiper-button-prev {
+    width: 70%;
+  }
+} */
