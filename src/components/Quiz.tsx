@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material";
+import { Box, Button, FormControl, FormControlLabel, FormLabel, Paper, Radio, RadioGroup, Typography } from "@mui/material";
 import { CSSProperties, useEffect, useState } from "react";
 import { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,7 +12,6 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { questions } from "../utils/QuestionData";
-import { Height } from "@mui/icons-material";
 
 
 function Quiz() {
@@ -42,6 +41,7 @@ function Quiz() {
 
   function currentSlide(swiper: any) {
     document.documentElement.style.setProperty('--swiper-theme-color', '#ffa726');
+    window.scrollTo(0, 0);
     const activeSlide: HTMLElement = swiper.slides[swiper.activeIndex]
     setActiveSlideIndex(swiper.activeIndex)
     setRadioButtons(activeSlide.getElementsByTagName('input'))
@@ -110,10 +110,10 @@ function Quiz() {
   return (
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y]}
-      className='swiperStyle'
       spaceBetween={50}
       slidesPerView={1}
       centeredSlides={true}
+      className='swiperStyle'
       navigation
       mousewheel
       pagination={{ clickable: true }}
@@ -121,48 +121,60 @@ function Quiz() {
       onSlideChange={(swiper) => currentSlide(swiper)}
     >
       {selectedQuestions.map((question, index) => (
-        <SwiperSlide style={{paddingTop: '12rem'}} className="centerColumn" key={index}>
-          <form className='centerColumn' onSubmit={(e) => handleSubmit(e)}>
-            {question.image ? <img style={image} src={question.image} /> : null}
-            <Box sx={{ display: 'flex', gap: '1rem' }}>
-              <Typography>{question.description}</Typography>
+        <SwiperSlide className="centerColumn" key={index}>
+          <form className='swiperForm' onSubmit={(e) => handleSubmit(e)}>
+            <Paper className="swiperPaper" elevation={10}>
               <Typography>Fråga {index += 1} av {selectedQuestions.length}</Typography>
-            </Box>
-            <FormControl>
-              <FormLabel color="warning" id="demo-radio-buttons-group-label">Svarsalternativ</FormLabel>
-              <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                onChange={handleRadioChange}
-                name="radio-buttons-group"
+              {question.image ? <img style={image} src={question.image} /> : null}
+              <Typography sx={{ width: { xs: '85%', md: '70%', lg: '50%', xl: '40%' } }}>{question.description}</Typography>
+              <FormControl
+                sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
               >
-                {question.alternatives.map((item, answerIndex) => (
-                  <FormControlLabel
-                    key={item}
-                    value={answerIndex}
-                    control={<Radio color="warning" />}
-                    label={item} />
-                ))
-                }
-              </RadioGroup>
-              <Button
-                color="warning"
-                disabled
-                type="submit">
-                Lås svar
-              </Button>
-            </FormControl>
+                <FormLabel color="warning" id="demo-radio-buttons-group-label">Svarsalternativ:</FormLabel>
+                <RadioGroup
+                  sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  onChange={handleRadioChange}
+                  name="radio-buttons-group"
+                >
+                  {question.alternatives.map((item, answerIndex) => (
+                    <FormControlLabel
+                      sx={{ width: { xs: '85%', md: '70%', lg: '50%', xl: '40%' } }}
+                      key={item}
+                      value={answerIndex}
+                      control={<Radio color="warning" />}
+                      label={item} />
+                  ))
+                  }
+                </RadioGroup>
+                <Box sx={{ display: 'flex', justifyContent: 'space-evenly', width: 300, marginTop: '1rem' }}>
+                  <Button
+                    color="warning"
+                    disabled
+                    type="submit">
+                    Lås svar
+                  </Button>
+                  {index === selectedQuestions.length ?
+                    <Button
+                      onClick={() => navigate('result')}
+                      color="warning"
+                      variant="outlined"
+                      sx={{
+                        position: 'relative',
+                        background: '#ffa726',
+                        color: 'black',
+                        fontWeight: '600',
+                        '&:hover': {
+                          backgroundColor: 'rgba(0, 0, 0, 0)',
+                          color: '#ff9100',
+                        }
+                      }}>Räkna ut resultat</Button> :
+                    null
+                  }
+                </Box>
+              </FormControl>
+            </Paper>
           </form>
-          {index === selectedQuestions.length ?
-            <Button
-              onClick={() => navigate('result')}
-              color="warning"
-              variant="outlined"
-              sx={{
-                position: 'relative',
-                bottom: '5rem',
-              }}>Resultat</Button> :
-            null
-          }
         </SwiperSlide>
       ))}
     </Swiper>
