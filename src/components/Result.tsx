@@ -18,7 +18,7 @@ function Result() {
   return (
     <Box className="centerColumn">
       <Typography>Resultat: {percentage}%</Typography>
-      <Typography>{score}/{possibleScore}</Typography>
+      <Typography>{score}/{possibleScore} rätt</Typography>
     </Box>
   );
 }

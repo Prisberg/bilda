@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormControlLabel, FormLabel, Paper, Radio, RadioGroup, Typography } from "@mui/material";
+import { Box, Button, FormControl, FormControlLabel, FormLabel, Paper, Radio, RadioGroup, SxProps, Typography } from "@mui/material";
 import { CSSProperties, useEffect, useState } from "react";
 import { A11y, Navigation, Pagination, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -21,6 +21,7 @@ function Quiz() {
   const [checkedRadio, setCheckedRadio] = useState<HTMLInputElement>()
   const [correctAnswer, setCorrectAnswer] = useState<number>()
   const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
+  const [amountOfSubmittedAnswers, setAmountOfSubmittedAnswers] = useState<number>(0)
   const [radioButtons, setRadioButtons] = useState<HTMLCollectionOf<HTMLInputElement>>()
   const [radioLabels, setRadioLabels] = useState<NodeListOf<HTMLElement>>()
 
@@ -61,6 +62,9 @@ function Quiz() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    //Count the amount of submitted answers.
+    setAmountOfSubmittedAnswers(amountOfSubmittedAnswers + 1)
+
     //Checks if your answer was correct.
     if (checkedRadio) {
       if (parseInt(checkedRadio.value) === correctAnswer) {
@@ -73,6 +77,7 @@ function Quiz() {
         //set state to render right or wrong snackbar
       }
     }
+
     //Lock the radio buttons.
     if (radioButtons) {
       for (let i = 0; i < radioButtons.length; i++) {
@@ -80,6 +85,7 @@ function Quiz() {
         radio.setAttribute('disabled', 'true')
       }
     }
+
     //Lock submit button.
     if (submitButton) {
       submitButton.setAttribute('disabled', 'true')
@@ -95,17 +101,26 @@ function Quiz() {
 
         if (activeSlideIndex != undefined) {
           if (i === questions[activeSlideIndex].correctAlternativeIndex) {
-            radioCircle.style.color = 'green'
-            singleLabel.style.color = 'green'
+            radioCircle.style.color = '#10ec13'
+            singleLabel.style.color = '#10ec13'
           } else {
-            radioCircle.style.color = 'red'
-            singleLabel.style.color = 'red'
+            radioCircle.style.color = '#ff0000'
+            singleLabel.style.color = '#ff0000'
           }
         }
       }
     }
-  };
+  }
 
+  function result() {
+    if (amountOfSubmittedAnswers < selectedQuestions.length) {
+      if (window.confirm('Du har inte svarat på alla frågor, vill du gå till resultatet ändå?')) {
+        navigate('result');
+      }
+    } else {
+      navigate('result')
+    }
+  }
 
   return (
     <Swiper
@@ -125,29 +140,33 @@ function Quiz() {
           <form className='swiperForm' onSubmit={(e) => handleSubmit(e)}>
             <Paper className="swiperPaper" elevation={10}>
               <Typography>Fråga {index += 1} av {selectedQuestions.length}</Typography>
-              {question.image ? <img style={image} src={question.image} /> : null}
-              <Typography sx={{ width: { xs: '85%', md: '70%', lg: '50%', xl: '40%' } }}>{question.description}</Typography>
+              {question.image ? <img style={imageStyle} src={question.image} /> : null}
+              <Typography sx={textStyle}>{question.description}</Typography>
               <FormControl
-                sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
               >
                 <FormLabel color="warning" id="demo-radio-buttons-group-label">Svarsalternativ:</FormLabel>
                 <RadioGroup
-                  sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                   aria-labelledby="demo-radio-buttons-group-label"
                   onChange={handleRadioChange}
                   name="radio-buttons-group"
                 >
                   {question.alternatives.map((item, answerIndex) => (
                     <FormControlLabel
-                      sx={{ width: { xs: '85%', md: '70%', lg: '50%', xl: '40%' } }}
+                      className="center"
+                      sx={formControlStyle}
                       key={item}
                       value={answerIndex}
                       control={<Radio color="warning" />}
-                      label={item} />
+                      label={<Typography sx={textStyle}>{item}</Typography>} />
                   ))
                   }
                 </RadioGroup>
-                <Box sx={{ display: 'flex', justifyContent: 'space-evenly', width: 300, marginTop: '1rem' }}>
+                <Box sx={buttonBoxStyle}>
                   <Button
                     color="warning"
                     disabled
@@ -156,19 +175,10 @@ function Quiz() {
                   </Button>
                   {index === selectedQuestions.length ?
                     <Button
-                      onClick={() => navigate('result')}
+                      onClick={() => result()}
                       color="warning"
                       variant="outlined"
-                      sx={{
-                        position: 'relative',
-                        background: '#ffa726',
-                        color: 'black',
-                        fontWeight: '600',
-                        '&:hover': {
-                          backgroundColor: 'rgba(0, 0, 0, 0)',
-                          color: '#ff9100',
-                        }
-                      }}>Räkna ut resultat</Button> :
+                      sx={buttonStyle}>Räkna ut resultat</Button> :
                     null
                   }
                 </Box>
@@ -183,7 +193,42 @@ function Quiz() {
 
 export default Quiz;
 
-const image: CSSProperties = {
+const imageStyle: CSSProperties = {
   width: '200px',
   height: '200px'
+}
+
+const textStyle: SxProps = {
+  padding: '1rem 0',
+  width: { xs: '85%', md: '70%', lg: '50%', xxl: '40%' },
+  fontSize: { xs: '1.2rem', xl: '1.5rem' },
+  whiteSpace: 'pre-wrap',
+  fontFamily: 'Fanwood Text',
+}
+
+const buttonBoxStyle: SxProps = {
+  display: 'flex',
+  justifyContent: 'space-evenly',
+  gap: '1rem',
+  marginTop: '1rem'
+}
+
+const formControlStyle: SxProps = {
+  transition: 'border 300ms',
+  border: { xs: '1px solid #6d6c6c', lg: 'none' },
+  borderRadius: '5px',
+  marginBottom: '1rem',
+  marginLeft: '0',
+  '&:active': { borderColor: '#ffa726', }
+}
+
+const buttonStyle: SxProps = {
+  position: 'relative',
+  background: '#ffa726',
+  color: 'black',
+  fontWeight: '600',
+  '&:hover': {
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    color: '#ff9100',
+  }
 }

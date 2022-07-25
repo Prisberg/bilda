@@ -10,6 +10,12 @@ const darkTheme = createTheme({
   palette: {
     mode: 'dark',
   },
+  typography: {
+    fontFamily: [
+      'Julius Sans One',
+      'Fanwood Text',
+    ].join(','),
+  },
 });
 
 const root = ReactDOM.createRoot(
