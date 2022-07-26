@@ -1,13 +1,15 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import CreateQuestion from "./CreateQuestion";
+import HandlePersonalQuestions from "./HandlePersonalQuestions";
 
 
 function Settings() {
 
     return (
-        <Box className="centerColumn">
-            <Typography variant="h4">settings</Typography>
+        <Box sx={{gap: '1rem'}} className="centerColumn">
+            <Typography variant="h4">Inställningar</Typography>
             <CreateQuestion/>
+            <HandlePersonalQuestions/>
         </Box>
     );
 }
