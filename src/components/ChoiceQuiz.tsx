@@ -11,7 +11,6 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { questions } from "../utils/QuestionData";
 
 
 export default function ChoiceQuiz() {
@@ -94,7 +93,7 @@ export default function ChoiceQuiz() {
         const radioCircle = singleLabel.children[0] as HTMLElement
 
         if (activeSlideIndex != undefined) {
-          if (i === questions[activeSlideIndex].correctAlternativeIndex) {
+          if (i === selectedQuestions[activeSlideIndex].correctAlternativeIndex) {
             radioCircle.style.color = '#10ec13'
             singleLabel.style.color = '#10ec13'
           } else {
