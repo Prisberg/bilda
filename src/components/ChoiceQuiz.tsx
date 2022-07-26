@@ -129,9 +129,22 @@ export default function ChoiceQuiz() {
       onSlideChange={(swiper) => currentSlide(swiper)}
     >
       {selectedQuestions.map((question, index) => (
-        <SwiperSlide className="centerColumn" key={index}>
-          <form className='swiperForm' onSubmit={(e) => handleSubmit(e)}>
-            <Paper className="swiperPaper" elevation={10}>
+        <SwiperSlide key={index}>
+          <form className="center" onSubmit={(e) => handleSubmit(e)}>
+            <Paper
+              sx={{
+                flexDirection: 'column',
+                marginBottom: '5rem',
+                padding: '1rem',
+                width: {
+                  xs: '85%',
+                  md: '70%',
+                  lg: '50%',
+                  xxl: '40%'
+                },
+              }}
+              className="swiperPaper"
+              elevation={10}>
               <Typography>Fråga {index += 1} av {selectedQuestions.length}</Typography>
               {question.image ? <img style={imageStyle} src={question.image} /> : null}
               <Typography sx={textStyle}>{question.description}</Typography>
@@ -191,8 +204,7 @@ const imageStyle: CSSProperties = {
 
 const textStyle: SxProps = {
   padding: '1rem 0',
-  width: { xs: '85%', md: '70%', lg: '50%', xxl: '40%' },
-  fontSize: { xs: '1.2rem', xl: '1.5rem' },
+  width: { xs: '85%', md: '70%' },
   whiteSpace: 'pre-wrap',
   fontFamily: 'Fanwood Text',
 }
@@ -206,7 +218,7 @@ const buttonBoxStyle: SxProps = {
 
 const formControlStyle: SxProps = {
   transition: 'border 300ms',
-  border: { xs: '1px solid #6d6c6c', lg: 'none' },
+  border: '1px solid #6d6c6c',
   borderRadius: '5px',
   marginBottom: '1rem',
   marginLeft: '0',
