@@ -22,7 +22,6 @@ function App() {
           <Route path="/flash-quiz" element={username && quizActive ? <FlashQuiz /> : <BadGate />} />
           <Route path="/choice-quiz" element={username && quizActive ? <ChoiceQuiz /> : <BadGate />} />
           <Route path="/choice-quiz/result" element={username && possibleScore ? <Result /> : <BadGate />} />
-          <Route path="/flash-quiz/result" element={username && possibleScore ? <Result /> : <BadGate />} />
           <Route path="/settings" element={username ? <Settings /> : <BadGate />} />
           <Route path="*" element={<BadGate />} />
         </Routes>

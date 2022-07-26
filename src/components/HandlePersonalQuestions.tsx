@@ -23,7 +23,7 @@ const Transition = React.forwardRef(function Transition(
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CreateQuestion() {
+export default function HandlePersonalQuestions() {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
@@ -37,7 +37,7 @@ export default function CreateQuestion() {
     return (
         <Box>
             <Button color='warning' variant="outlined" onClick={handleClickOpen}>
-                Skapa personliga frågor
+                Hantera personliga frågor
             </Button>
             <Dialog
                 fullScreen
@@ -56,25 +56,15 @@ export default function CreateQuestion() {
                             <CloseIcon />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                            Din fråga
+                            Dina frågor
                         </Typography>
-                        <Button autoFocus color="warning" onClick={handleClose}>
-                            Spara
-                        </Button>
                     </Toolbar>
                 </AppBar>
-                <TextField 
-                sx={textFieldStyle}
-                rows={3}
-                ></TextField>
-                <TextField 
-                sx={textFieldStyle}
-                rows={3}
-                ></TextField>
-                <TextField 
-                sx={textFieldStyle}
-                rows={3}
-                ></TextField>
+                <List>
+                    <ListItem>fråga1</ListItem>
+                    <ListItem>fråga2</ListItem>
+                    <ListItem>fråga3</ListItem>
+                </List>
             </Dialog>
         </Box>
     );

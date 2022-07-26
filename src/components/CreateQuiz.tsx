@@ -26,7 +26,7 @@ function CreateQuiz() {
         <InputLabel
           color="warning"
           id="demo-select-small">
-          Max antal frågor
+          Antal frågor
         </InputLabel>
         <Select
           labelId="demo-select-small"
@@ -42,39 +42,43 @@ function CreateQuiz() {
           <MenuItem value={50}>50</MenuItem>
         </Select>
       </FormControl>
-      {selectedCategories.length > 0 ?
-        <Box sx={{ display: 'flex', gap: '1rem' }}>
-          <Button
-            variant="outlined"
-            color="warning"
-            onClick={() => {
-              setQuizActive(true);
-              extractQuestions();
-              navigate('/flash-quiz');
-            }}>
-            Skapa flashcard Quiz
-          </Button><Button
-            variant="outlined"
-            color="warning"
-            onClick={() => {
-              setQuizActive(true);
-              extractQuestions();
-              navigate('/choice-quiz');
-            }}>
-            Skapa flervals Quiz
-          </Button>
-        </Box> :
-        <Box sx={{ display: 'flex', gap: '1rem' }}>
-          <Button
-            variant="outlined"
-            disabled>
-            Skapa flashcard Quiz
-          </Button><Button
-            variant="outlined"
-            disabled>
-            Skapa flervals Quiz
-          </Button>
-        </Box>}
+      <Box sx={{ display: 'flex', gap: '1rem', padding: '1rem' }}>
+        {selectedCategories.length > 0 ?
+          <>
+            <Button
+              variant="outlined"
+              color="warning"
+              onClick={() => {
+                setQuizActive(true);
+                extractQuestions();
+                navigate('/flash-quiz');
+              }}>
+              Skapa flashcard Quiz
+            </Button><Button
+              variant="outlined"
+              color="warning"
+              onClick={() => {
+                setQuizActive(true);
+                extractQuestions();
+                navigate('/choice-quiz');
+              }}>
+              Skapa flervals Quiz
+            </Button>
+          </>
+          :
+          <>
+            <Button
+              variant="outlined"
+              disabled>
+              Skapa flashcard Quiz
+            </Button><Button
+              variant="outlined"
+              disabled>
+              Skapa flervals Quiz
+            </Button>
+          </>
+        }
+      </Box>
     </Box>
   );
 }
