@@ -41,23 +41,40 @@ function CreateQuiz() {
           <MenuItem value={40}>40</MenuItem>
           <MenuItem value={50}>50</MenuItem>
         </Select>
-        {selectedCategories.length > 0 ?
+      </FormControl>
+      {selectedCategories.length > 0 ?
+        <Box sx={{ display: 'flex', gap: '1rem' }}>
           <Button
             variant="outlined"
             color="warning"
             onClick={() => {
               setQuizActive(true);
               extractQuestions();
-              navigate('/quiz');
+              navigate('/flash-quiz');
             }}>
-            Starta Quiz
-          </Button> :
+            Skapa flashcard Quiz
+          </Button><Button
+            variant="outlined"
+            color="warning"
+            onClick={() => {
+              setQuizActive(true);
+              extractQuestions();
+              navigate('/choice-quiz');
+            }}>
+            Skapa flervals Quiz
+          </Button>
+        </Box> :
+        <Box sx={{ display: 'flex', gap: '1rem' }}>
           <Button
             variant="outlined"
             disabled>
-            Starta Quiz
-          </Button>}
-      </FormControl>
+            Skapa flashcard Quiz
+          </Button><Button
+            variant="outlined"
+            disabled>
+            Skapa flervals Quiz
+          </Button>
+        </Box>}
     </Box>
   );
 }

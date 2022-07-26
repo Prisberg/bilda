@@ -14,7 +14,7 @@ import 'swiper/css/scrollbar';
 import { questions } from "../utils/QuestionData";
 
 
-function Quiz() {
+export default function FlashQuiz() {
   let { selectedQuestions, setScore, score } = useQuizContext()
   const navigate = useNavigate()
   const [submitButton, setSubmitButton] = useState<HTMLButtonElement>()
@@ -68,13 +68,7 @@ function Quiz() {
     //Checks if your answer was correct.
     if (checkedRadio) {
       if (parseInt(checkedRadio.value) === correctAnswer) {
-        console.log('correct answer')
-        const onePoint = 1
-        setScore(score + onePoint)
-        //set state to render right or wrong snackbar
-      } else {
-        console.log('wrong answer');
-        //set state to render right or wrong snackbar
+        setScore(score + 1)
       }
     }
 
@@ -142,56 +136,22 @@ function Quiz() {
               <Typography>Fråga {index += 1} av {selectedQuestions.length}</Typography>
               {question.image ? <img style={imageStyle} src={question.image} /> : null}
               <Typography sx={textStyle}>{question.description}</Typography>
-              <FormControl
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}
-              >
-                <FormLabel color="warning" id="demo-radio-buttons-group-label">Svarsalternativ:</FormLabel>
-                <RadioGroup
-                  aria-labelledby="demo-radio-buttons-group-label"
-                  onChange={handleRadioChange}
-                  name="radio-buttons-group"
-                >
-                  {question.alternatives.map((item, answerIndex) => (
-                    <FormControlLabel
-                      className="center"
-                      sx={formControlStyle}
-                      key={item}
-                      value={answerIndex}
-                      control={<Radio color="warning" />}
-                      label={<Typography sx={textStyle}>{item}</Typography>} />
-                  ))
-                  }
-                </RadioGroup>
-                <Box sx={buttonBoxStyle}>
-                  <Button
-                    color="warning"
-                    disabled
-                    type="submit">
-                    Lås svar
-                  </Button>
-                  {index === selectedQuestions.length ?
-                    <Button
-                      onClick={() => result()}
-                      color="warning"
-                      variant="outlined"
-                      sx={buttonStyle}>Räkna ut resultat</Button> :
-                    null
-                  }
-                </Box>
-              </FormControl>
+              {index === selectedQuestions.length ?
+                <Button
+                  onClick={() => result()}
+                  color="warning"
+                  variant="outlined"
+                  sx={buttonStyle}>
+                  Räkna ut resultat
+                </Button> :
+                null}
             </Paper>
           </form>
         </SwiperSlide>
       ))}
-    </Swiper>
+    </Swiper >
   );
 }
-
-export default Quiz;
 
 const imageStyle: CSSProperties = {
   width: '200px',

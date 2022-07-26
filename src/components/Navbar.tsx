@@ -11,7 +11,7 @@ function Navbar() {
     const { quizActive, setQuizActive, username } = useQuizContext()
 
     useEffect(() => {
-        if (location.pathname === '/quiz' && quizActive) {
+        if (location.pathname === '/choice-quiz' && quizActive || location.pathname === '/flash-quiz' && quizActive) {
             return
         } else {
             setQuizActive(false)
@@ -19,7 +19,7 @@ function Navbar() {
     }, [location]);
 
     function navigation(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-        if (location.pathname === '/quiz' && quizActive) {
+        if (location.pathname === '/choice-quiz' && quizActive || location.pathname === '/flash-quiz' && quizActive) {
             if (window.confirm('Om du lämnar sidan nu kommer quizet avbrytas')) {
                 e.currentTarget.innerText ? navigate('/') : navigate('/settings')
             }
