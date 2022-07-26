@@ -37,7 +37,7 @@ body {
   background-color: #6d6c6c;
 }
 
-.swiperForm {
+.swiperPaper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,18 +49,7 @@ body {
   user-select: none;
 }
 
-.swiperForm:active {
+.swiperPaper:active {
   cursor: -webkit-grabing;
   cursor: grabbing;
-}
-
-.swiperPaper {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 90%;
-  margin-bottom: 5rem;
-  padding: 1rem 0;
-  gap: 1rem;
-
 }
