@@ -45,15 +45,15 @@ export const questions: QuestionInterface[] = [
     {
         category: 'Engelska',
         image: '',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        alternatives: ['one', 'two', 'three'],
+        description: `Which is a synonym for the following word: Despotism`,
+        alternatives: ['Tyranny', 'Government', 'Discouragement'],
         correctAlternativeIndex: 0
     },
     {
         category: 'Matematik',
         image: '',
-        description: '',
-        alternatives: ['one', 'two', 'three'],
+        description: ``,
+        alternatives: [``, ``, ``],
         correctAlternativeIndex: 0
     },
     {
@@ -108,14 +108,14 @@ export const questions: QuestionInterface[] = [
     {
         category: 'Juridik',
         image: '',
-        description: '',
-        alternatives: ['one', 'two', 'three'],
-        correctAlternativeIndex: 0
+        description: `Vad krävs för att en civil person på svensk mark ska ha lagstöd i att utföra ett envarsgripande?`,
+        alternatives: ['Endast om brottet är av typen misshandel samt att man har tagit gärningsmannen på bar gärning.', 'Brottet ger böter och det finns tydlig risk att gärningsmannen kommer upprepa brottet. Gripande får även ske om gärningsmannen är efterlyst', 'Brottet kan ge fängelsestraff, man har tagit personen på bar gärning eller på flyende fot från brottsplatsen. Gripande får även ske om gärningsmannen är efterlyst.'],
+        correctAlternativeIndex: 2
     },
     {
         category: 'Livräddning',
         image: '',
-        description: '',
+        description: ``,
         alternatives: ['one', 'two', 'three'],
         correctAlternativeIndex: 0
     },
