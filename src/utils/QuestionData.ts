@@ -66,16 +66,16 @@ export const questions: QuestionInterface[] = [
     {
         category: 'Anatomi',
         image: '',
-        description: '',
-        alternatives: ['one', 'two', 'three'],
-        correctAlternativeIndex: 0
+        description: `Namnet för stora bröstmuskeln på Latin?`,
+        alternatives: ['Deltoideus', 'Sternocleidomastoid', 'pectoralis major'],
+        correctAlternativeIndex: 2
     },
     {
         category: 'Mytologi',
         image: '',
-        description: '',
-        alternatives: ['one', 'two', 'three'],
-        correctAlternativeIndex: 0
+        description: `Hur skapades jorden enligt Asatron?`,
+        alternatives: ['Jorden fanns redan där innan gudarna tillkom.', 'Oden dödade jätten Ymer och skapade jorden från hans kadaver.', 'Jorden var frukten från världsträdet Yggdrasil.'],
+        correctAlternativeIndex: 1
     },
     {
         category: 'Religion',
