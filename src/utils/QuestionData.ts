@@ -94,9 +94,30 @@ export const questions: QuestionInterface[] = [
     {
         category: 'Teknik',
         image: '',
-        description: '',
-        alternatives: ['one', 'two', 'three'],
+        description: 'Vilken partikel har negativ laddning?',
+        alternatives: ['Neutron', 'Proton', 'Butanol'],
+        correctAlternativeIndex: 2
+    },
+    {
+        category: 'Teknik',
+        image: '',
+        description: 'Hur många kromosomer har en människa normalt?',
+        alternatives: ['32', '46', '63'],
+        correctAlternativeIndex: 1
+    },
+    {
+        category: 'Teknik',
+        image: '',
+        description: 'Vad är spriten som vissa dricker?',
+        alternatives: ['Etanol', 'Metanol', '63'],
         correctAlternativeIndex: 0
+    },
+    {
+        category: 'Teknik',
+        image: '',
+        description: 'Vad är en legering?',
+        alternatives: ['En ädelmetal med som inte är elektriskt ledande.', 'Kemiska avlagringar', 'En blandning av kemiska element varav minst en är en metall.'],
+        correctAlternativeIndex: 2
     },
     {
         category: 'Trafik',
@@ -153,20 +174,6 @@ export const questions: QuestionInterface[] = [
         description: `Jätteloka, ätbar eller inte?`,
         alternatives: [`Ätbar`, `Inte ätbar`],
         correctAlternativeIndex: 1
-    },
-    {
-        category: 'Personliga frågor',
-        image: '',
-        description: '',
-        alternatives: ['one', 'two', 'three'],
-        correctAlternativeIndex: 0
-    },
-    {
-        category: 'Externt hämtade frågor (Api)',
-        image: '',
-        description: '',
-        alternatives: ['one', 'two', 'three'],
-        correctAlternativeIndex: 0
     },
 ]
 
