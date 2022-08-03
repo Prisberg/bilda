@@ -108,8 +108,8 @@ export const questions: QuestionInterface[] = [
     {
         category: 'Teknik',
         image: '',
-        description: 'Vad är spriten som vissa dricker?',
-        alternatives: ['Etanol', 'Metanol', '63'],
+        description: 'Vad är namnet på den kemiska komponenten i sprit som gör en berusad?',
+        alternatives: ['Etanol', 'Metanol', 'Butanol'],
         correctAlternativeIndex: 0
     },
     {
@@ -122,8 +122,8 @@ export const questions: QuestionInterface[] = [
     {
         category: 'Trafik',
         image: '',
-        description: '',
-        alternatives: ['one', 'two', 'three'],
+        description: 'Vilka/vems anvisngar har störst tyngd i trafiken',
+        alternatives: ['Trafikpolis', 'Vägskyltar', 'Ljussignaler'],
         correctAlternativeIndex: 0
     },
     {
