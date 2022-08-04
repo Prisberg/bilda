@@ -87,15 +87,15 @@ export const questions: QuestionInterface[] = [
     {
         category: 'Kemi',
         image: '',
-        description: '',
-        alternatives: ['one', 'two', 'three'],
+        description: 'Vad kallas atomens beståndsdelar?',
+        alternatives: ['Pascal, neutron, nukleus', 'Nukleus, valence, proton, ', 'Proton, neutron, elektron'],
         correctAlternativeIndex: 0
     },
     {
-        category: 'Teknik',
+        category: 'Kemi',
         image: '',
         description: 'Vilken partikel har negativ laddning?',
-        alternatives: ['Neutron', 'Proton', 'Butanol'],
+        alternatives: ['Neutron', 'Proton', 'Elektron'],
         correctAlternativeIndex: 2
     },
     {
