@@ -66,9 +66,16 @@ export const questions: QuestionInterface[] = [
     {
         category: 'Anatomi',
         image: '',
-        description: `Namnet för stora bröstmuskeln på Latin?`,
+        description: `Namnet för den sneda halsmuskeln på Latin?`,
         alternatives: ['Deltoideus', 'Sternocleidomastoid', 'pectoralis major'],
         correctAlternativeIndex: 2
+    },
+    {
+        category: 'Anatomi',
+        image: '',
+        description: `Namnet för stora bröstmuskeln på Latin?`,
+        alternatives: ['Deltoideus', 'Sternocleidomastoid', 'Gluteus maximus'],
+        correctAlternativeIndex: 1
     },
     {
         category: 'Mytologi',
@@ -89,7 +96,7 @@ export const questions: QuestionInterface[] = [
         image: '',
         description: 'Vad kallas atomens beståndsdelar?',
         alternatives: ['Pascal, neutron, nukleus', 'Nukleus, valence, proton, ', 'Proton, neutron, elektron'],
-        correctAlternativeIndex: 0
+        correctAlternativeIndex: 2
     },
     {
         category: 'Kemi',
