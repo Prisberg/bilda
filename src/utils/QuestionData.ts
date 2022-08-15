@@ -68,13 +68,13 @@ export const questions: QuestionInterface[] = [
         image: '',
         description: `Namnet för den sneda halsmuskeln på Latin?`,
         alternatives: ['Deltoideus', 'Sternocleidomastoid', 'pectoralis major'],
-        correctAlternativeIndex: 2
+        correctAlternativeIndex: 1
     },
     {
         category: 'Anatomi',
         image: '',
         description: `Namnet för stora bröstmuskeln på Latin?`,
-        alternatives: ['Deltoideus', 'Sternocleidomastoid', 'Gluteus maximus'],
+        alternatives: ['Pectorialis major', 'Deltoideus', 'Gluteus maximus'],
         correctAlternativeIndex: 1
     },
     {
